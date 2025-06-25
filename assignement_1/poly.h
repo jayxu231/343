@@ -11,6 +11,7 @@ private:
     int size;
 public:
     Poly();
+    Poly(int s);
     Poly(int c, int s);
     ~Poly();
 
