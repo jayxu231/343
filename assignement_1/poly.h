@@ -1,3 +1,11 @@
+// ---------------------------------- poly.h ------------------------------------
+// Jayden Sastradi, CSS343
+// Date Created: ...
+// Last Modified: ...
+// -----------------------------------------------------------------------------
+// Purpose: Defines the Poly class for implementation.
+// -----------------------------------------------------------------------------
+
 #ifndef POLY_H
 #define POLY_H
 
@@ -5,33 +13,37 @@
 
 class Poly {
 private:
-// use an array not a vector for this assignement
-// size of the array will change in runtime, learn how to do that 
+
     int *coefficient;
     int size;
 public:
     Poly();
-    Poly(int s);
-    Poly(int c, int s);
+    Poly(int e);
+    Poly(int c, int e);
+    Poly(const Poly &other);
     ~Poly();
 
     Poly operator+(const Poly &other);
     Poly operator-(const Poly &other);
     Poly operator*(const Poly &other);
 
-    Poly operator=(const Poly &other);
+    Poly& operator=(const Poly &other);
 
-    Poly operator+=(const Poly &other);
-    Poly operator-=(const Poly &other);
-    Poly operator*=(const Poly &other);
+    Poly& operator+=(const Poly &other);
+    Poly& operator-=(const Poly &other);
+    Poly& operator*=(const Poly &other);
+
+    friend std::istream& operator>>(std::istream& in, Poly& poly);
+    friend std::ostream& operator<<(std::ostream& out, const Poly& poly);
+// helper function to create a bigger array when needed
+    void setArr(int e);
+// helper function to get the coefficient of the exponent
+    int getCoeff(int e) const;
+    void setCoeff(int c, int e);
 
 
-    int getCoeff(int s);
-    void setCoeff(int c, int s);
-    void print() const;
 
-
-}
+};
 
 
 #endif
