@@ -28,7 +28,9 @@ public:
     Poly operator*(const Poly &other);
 
     Poly& operator=(const Poly &other);
-
+    bool operator==(const Poly& other) const;
+    bool operator!=(const Poly& other) const;
+    
     Poly& operator+=(const Poly &other);
     Poly& operator-=(const Poly &other);
     Poly& operator*=(const Poly &other);

@@ -14,8 +14,9 @@
 // Default constructor initializing the polynomial to 0x^0.
 // ----------------------------------------------------------------------------------
 Poly::Poly() {
-    size = 1;
-    setArr(size);
+    size = 0;
+    coefficient = nullptr;
+    setArr(1);
     coefficient[0] = 0;
 }
 
@@ -23,8 +24,9 @@ Poly::Poly() {
 // Initializes polynomial to a constant c.
 // ----------------------------------------------------------------------------------
 Poly::Poly(int c) {
-    size = 1;
-    setArr(size);
+    size = 0;
+    coefficient = nullptr;
+    setArr(1);
     coefficient[0] = c;
 }
 
@@ -32,8 +34,9 @@ Poly::Poly(int c) {
 // Initializes polynomial with coefficient c at exponent e.
 // ----------------------------------------------------------------------------------
 Poly::Poly(int c, int e) {
-    size = e + 1;
-    setArr(size);
+    size = 0;
+    coefficient = nullptr;
+    setArr(e + 1);
     coefficient[e] = c;
 }
 
@@ -41,8 +44,9 @@ Poly::Poly(int c, int e) {
 // Performs deep copy of another Poly object.
 // ----------------------------------------------------------------------------------
 Poly::Poly(const Poly& other) {
-    size = other.size;
-    setArr(size);
+    size = 0;
+    coefficient = nullptr;
+    setArr(other.size);
     for (int i = 0; i < size; i++) {
         coefficient[i] = other.coefficient[i];
     }
@@ -53,6 +57,7 @@ Poly::Poly(const Poly& other) {
 // ----------------------------------------------------------------------------------
 Poly::~Poly() {
     delete[] coefficient;
+    coefficient = nullptr;
 }
 
 // ---------------------------- operator+ (Addition) -----------------------------
@@ -106,6 +111,7 @@ Poly Poly::operator*(const Poly& other) {
 Poly& Poly::operator=(const Poly& other) {
     if (this != &other) {
         delete[] coefficient;
+        coefficient = nullptr;
         setArr(other.size);
         for (int i = 0; i < other.size; i++) {
             coefficient[i] = other.coefficient[i];
@@ -142,11 +148,44 @@ Poly& Poly::operator-=(const Poly& other) {
 
 // ---------------------- operator*= (Compound Multiplication) ------------------
 // Multiplies another Poly with this one in place.
-// (To be implemented)
 // ----------------------------------------------------------------------------------
 Poly& Poly::operator*=(const Poly& other) {
-    // To be implemented
+    int newSize = size + other.size - 1;
+    int * newCoeff = new int[newSize]{};
+
+    for(int i = 0; i < size; i ++){
+        for(int j = 0; j < other.size; j++){
+            newCoeff[i + j] += coefficient[i] * other.coefficient[j];
+        }
+    }
+
+    delete [] coefficient;
+
+    coefficient = newCoeff;
+    size = newSize;
+
     return *this;
+}
+
+// ---------------------- operator== (Equality Check) ------------------
+// Checks if two Polys are equal to each other.
+// ----------------------------------------------------------------------------------
+bool Poly::operator==(const Poly& other) const {
+    int maxSize = (size > other.size) ? size : other.size;
+    for (int i = 0; i < maxSize; ++i) {
+        int a = (i < size) ? coefficient[i] : 0;
+        int b = (i < other.size) ? other.coefficient[i] : 0;
+        if (a != b) {
+            return false;
+        }
+    }
+    return true;
+}
+// ---------------------- operator!= (Equality Check) ------------------
+// Checks if two Polys are not equal to each other.
+// ----------------------------------------------------------------------------------
+bool Poly::operator!=(const Poly& other) const {
+    return !(*this == other);
 }
 
 // -------------------------- operator>> (Input Stream) --------------------------
@@ -154,7 +193,12 @@ Poly& Poly::operator*=(const Poly& other) {
 // (To be implemented)
 // ----------------------------------------------------------------------------------
 std::istream& operator>>(std::istream& in, Poly& poly) {
-    // To be implemented
+    int coeff, exp;
+    while (true) {
+        in >> coeff >> exp;
+        if (coeff == -1 && exp == -1) break;
+        poly.setCoeff(coeff, exp);
+    }
     return in;
 }
 
@@ -163,7 +207,35 @@ std::istream& operator>>(std::istream& in, Poly& poly) {
 // (To be implemented)
 // ----------------------------------------------------------------------------------
 std::ostream& operator<<(std::ostream& out, const Poly& poly) {
-    // To be implemented
+    bool printed = false;
+    for (int i = poly.size - 1; i >= 0; --i) {
+        int coeff = poly.getCoeff(i);
+        if (coeff != 0) {
+            if (printed) {
+                out << (coeff > 0 ? " +" : " -");
+            } else {
+                out << (coeff > 0 ? "+" : "-");
+            }
+
+            if (std::abs(coeff) != 1 || i == 0) {
+                out << abs(coeff);
+            }
+
+            if (i > 0) {
+                out << "x";
+                if (i > 1) {
+                    out << "^" << i;
+                }
+            }
+
+            printed = true;
+        }
+    }
+
+    if (!printed) {
+        out << " 0";
+    }
+
     return out;
 }
 
