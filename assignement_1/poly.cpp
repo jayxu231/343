@@ -1,7 +1,7 @@
 // ---------------------------------- poly.cpp ----------------------------------
 // Jayden Sastradi, CSS343
 // Date Created: 6/25/2025
-// Last Modified: 6/26/2025
+// Last Modified: 7/1/2025
 // -----------------------------------------------------------------------------
 // Purpose: Implements the Poly class for polynomial arithmetic including operator
 // overloading for +, -, *, assignment, and stream I/O. Also includes dynamic memory
@@ -10,7 +10,7 @@
 
 #include "poly.h"
 
-// ------------------------------ Constructor: Poly() ------------------------------
+// ------------------------------ Constructor: Poly() -------------
 // Default constructor initializing the polynomial to 0x^0.
 // ----------------------------------------------------------------------------------
 Poly::Poly() {
@@ -20,7 +20,7 @@ Poly::Poly() {
     coefficient[0] = 0;
 }
 
-// ---------------------------- Constructor: Poly(int) -----------------------------
+// ---------------------------- Constructor: Poly(int) ----------------
 // Initializes polynomial to a constant c.
 // ----------------------------------------------------------------------------------
 Poly::Poly(int c) {
@@ -30,7 +30,7 @@ Poly::Poly(int c) {
     coefficient[0] = c;
 }
 
-// ------------------------ Constructor: Poly(int c, int e) ------------------------
+// ------------------------ Constructor: Poly(int c, int e) -----------------
 // Initializes polynomial with coefficient c at exponent e.
 // ----------------------------------------------------------------------------------
 Poly::Poly(int c, int e) {
@@ -40,7 +40,7 @@ Poly::Poly(int c, int e) {
     coefficient[e] = c;
 }
 
-// ------------------------------ Copy Constructor -------------------------------
+// ------------------------------ Copy Constructor -------------------
 // Performs deep copy of another Poly object.
 // ----------------------------------------------------------------------------------
 Poly::Poly(const Poly& other) {
@@ -52,7 +52,7 @@ Poly::Poly(const Poly& other) {
     }
 }
 
-// ----------------------------- Destructor: ~Poly() -----------------------------
+// ----------------------------- Destructor: ~Poly() ---------------------
 // Frees dynamically allocated memory.
 // ----------------------------------------------------------------------------------
 Poly::~Poly() {
@@ -60,7 +60,7 @@ Poly::~Poly() {
     coefficient = nullptr;
 }
 
-// ---------------------------- operator+ (Addition) -----------------------------
+// ---------------------------- operator+ (Addition) ---------------------
 // Returns a new Poly object that is the sum of this and another.
 // ----------------------------------------------------------------------------------
 Poly Poly::operator+(const Poly& other) {
@@ -75,7 +75,7 @@ Poly Poly::operator+(const Poly& other) {
     return result;
 }
 
-// ---------------------------- operator- (Subtraction) --------------------------
+// ---------------------------- operator- (Subtraction) -------------------
 // Returns a new Poly object that is the difference of this and another.
 // ----------------------------------------------------------------------------------
 Poly Poly::operator-(const Poly& other) {
@@ -90,7 +90,7 @@ Poly Poly::operator-(const Poly& other) {
     return result;
 }
 
-// --------------------------- operator* (Multiplication) ------------------------
+// --------------------------- operator* (Multiplication) --------------------
 // Returns a new Poly object that is the product of this and another.
 // ----------------------------------------------------------------------------------
 Poly Poly::operator*(const Poly& other) {
@@ -190,7 +190,6 @@ bool Poly::operator!=(const Poly& other) const {
 
 // -------------------------- operator>> (Input Stream) --------------------------
 // Reads terms (coefficient and exponent pairs) into the Poly.
-// (To be implemented)
 // ----------------------------------------------------------------------------------
 std::istream& operator>>(std::istream& in, Poly& poly) {
     int coeff, exp;
@@ -204,7 +203,6 @@ std::istream& operator>>(std::istream& in, Poly& poly) {
 
 // -------------------------- operator<< (Output Stream) -------------------------
 // Outputs the polynomial in standard form.
-// (To be implemented)
 // ----------------------------------------------------------------------------------
 std::ostream& operator<<(std::ostream& out, const Poly& poly) {
     bool printed = false;
@@ -259,7 +257,7 @@ void Poly::setArr(int s) {
     size = s;
 }
 // ------------------------------ setCoeff ----------------------------------------
-// set the Coefficient for the power
+// Function that sets the Coefficient for the power
 // ----------------------------------------------------------------------------------
 void Poly::setCoeff(int c, int e) {
     if(e < 0) {
@@ -271,8 +269,8 @@ void Poly::setCoeff(int c, int e) {
     }
     coefficient[e] = c;
 }
-// ------------------------------ getoeff ----------------------------------------
-// set the Coefficient for the power
+// ------------------------------ getCoeff ----------------------------------------
+// Function that gets the Coefficient for the power
 // ----------------------------------------------------------------------------------
 
 int Poly::getCoeff(int e) const {

@@ -1,7 +1,7 @@
 // ---------------------------------- poly.h ------------------------------------
 // Jayden Sastradi, CSS343
-// Date Created: ...
-// Last Modified: ...
+// Date Created: 6/25/2025
+// Last Modified: 7/1/2025
 // -----------------------------------------------------------------------------
 // Purpose: Defines the Poly class for implementation.
 // -----------------------------------------------------------------------------
@@ -37,9 +37,7 @@ public:
 
     friend std::istream& operator>>(std::istream& in, Poly& poly);
     friend std::ostream& operator<<(std::ostream& out, const Poly& poly);
-// helper function to create a bigger array when needed
     void setArr(int e);
-// helper function to get the coefficient of the exponent
     int getCoeff(int e) const;
     void setCoeff(int c, int e);
 
