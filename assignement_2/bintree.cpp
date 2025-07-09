@@ -58,9 +58,9 @@ int getHeight(const NodeData &targetData) const {
 }
 // converts BST to array
 void bstreeToArray(NodeData *dataArray[]) {
-
+// call the helpers
 }        
 // builds BST from sorted array
 void arrayToBSTree(NodeData *dataArray[]) {
-    
+// call helpers
 }       
