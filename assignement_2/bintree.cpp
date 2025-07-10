@@ -19,41 +19,78 @@ BinTree::BinTree(const BinTree &otherTree) {
 }
 
 BinTree::~BinTree() {
-    makeEmpty()
-    root = nullptr;
+    makeEmpty();
 }
 
 bool BinTree::isEmpty() const {
-return root == nullptr;
+    return root == nullptr;
 }
 
 void BinTree::makeEmpty() {
 // call the helper to clear the tree
+    makeEmptyHelper(root);
+}
+
+void BinTree::makeEmptyHelper(Node *&curr) {
+    if(curr == nullptr) {
+        return;
+    }
+
+    makeEmptyHelper(curr->left);
+    makeEmptyHelper(curr->right);
+
+    delete curr->data;
+    curr->data = nullptr;
+    delete curr;
+    curr = nullptr;
 }
 
 // assignment operator
-BinTree& BinTree:operator=(const BinTree &otherTree) {
+BinTree& BinTree::operator=(const BinTree &otherTree) {
 // deep copy the tree
-}
+    if(this == &otherTree) {
+        return;
+    }
 
+}
+BinTree::Node* BinTree::copyTree(Node *curr) const {
+    if(curr == nullptr) {
+        return nullptr;
+    }
+    Node * temp = new Node();
+    
+}
 // equality operator
 bool BinTree::operator==(const BinTree &otherTree) const {
-// go through all of the nodes at the same time using isEqual()
+    return isEqual(this->root, otherTree.root);
 } 
+
+// helper function called in operator==
+bool BinTree::isEqual(Node *nodeA, Node *nodeB) const {
+    if(nodeA == nullptr && nodeB == nullptr) {
+        return true;
+    }
+    if ((nodeA == nullptr) != (nodeB == nullptr)){
+        return false;
+    }
+
+    return *nodeA->data == *nodeB->data && isEqual(nodeA->left, nodeB->left) && isEqual(nodeA->right, nodeB->right);
+}
+
 // inequality operator
 bool BinTree::operator!=(const BinTree &otherTree) const {
-
+    return !isEqual(this->root, otherTree.root);
 }  
 // inserts a NodeData object
-bool insert(NodeData *newData) {
+bool BinTree::insert(NodeData *newData) {
 
 }   
 // retrieves data            
-bool retrieve(const NodeData &targetData, NodeData *&foundData) const {
+bool BinTree::retrieve(const NodeData &targetData, NodeData *&foundData) const {
 
 } 
 // gets height of a node
-int getHeight(const NodeData &targetData) const {
+int BinTree::getHeight(const NodeData &targetData) const {
 
 }
 // converts BST to array

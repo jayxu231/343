@@ -19,8 +19,8 @@ public:
 	BinTree(const BinTree &otherTree);				// copy constructor
 	~BinTree();								// destructor, calls makeEmpty	
 
-	bool isEmpty() const;					// true if tree is empty, otherwise false
-	void makeEmpty();						// make the tree empty so isEmpty returns true
+	bool isEmpty() const;		//done			// true if tree is empty, otherwise false
+	void makeEmpty();			//done			// make the tree empty so isEmpty returns true
 
     BinTree& operator=(const BinTree &otherTree);     // assignment operator
     bool operator==(const BinTree &otherTree) const;  // equality operator
@@ -44,8 +44,11 @@ private:
 	};
 	Node* root;								// root of the tree
 
-    // helper for makeEmpty()
+    // helper for makeEmpty() Done
     void makeEmptyHelper(Node *&curr);
+
+    // compares two subtrees Done
+    bool isEqual(Node *nodeA, Node *nodeB) const;
 
     // helper for insert()
     bool insertHelper(Node *&curr, NodeData *newData);
@@ -59,11 +62,8 @@ private:
     // computes height of a node
     int nodeHeight(Node *curr) const;
 
-    // compares two subtrees
-    bool isEqual(Node *nodeA, Node *nodeB) const;
-
     // deep copy utility
-    Node* copyTree(Node *sourceNode) const;
+    Node* copyTree(Node *curr) const;
 
     // helper for operator<< (inorder traversal)
     void inorderHelper(Node *curr) const;
