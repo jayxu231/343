@@ -50,10 +50,10 @@ private:
     // compares two subtrees Done
     bool isEqual(Node *nodeA, Node *nodeB) const;
 
-    // helper for insert()
+    // helper for insert() Done
     bool insertHelper(Node *&curr, NodeData *newData);
 
-    // helper for retrieve()
+    // helper for retrieve() Dones
     bool retrieveHelper(Node *curr, const NodeData &targetData, NodeData *&foundData) const;
 
     // helper for getHeight()
