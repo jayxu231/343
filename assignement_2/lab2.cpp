@@ -55,7 +55,7 @@ int main() {
 		// test retrieve 
 		NodeData* p;                    // pointer of retrieved object
 		bool found;                     // whether or not object was found in tree
-		found = T.retrieve(andND, p);
+		found = T.retrieve(andND, p  );
 		cout << "Retrieve --> and:  " << (found ? "found" : "not found") << endl;
 		found = T.retrieve(notND, p);
 		cout << "Retrieve --> not:  " << (found ? "found" : "not found") << endl;
