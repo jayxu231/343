@@ -14,13 +14,14 @@
 
 #include <iostream>
 #include <fstream>
-#include "graphl.h"
-#include "graphm.h"
+#include "graphL.h"
+#include "graphM.h"
 using namespace std;
 
 int main() {
-	
-	// part 1
+
+	// part 1 
+
 	ifstream infile1("data31.txt");
 	if (!infile1) {
 		cout << "File could not be opened." << endl;
@@ -39,7 +40,8 @@ int main() {
 		G.display(1, 2);
 		G.display(1, 4);
 	}
-	
+
+
 	// part 2 
 	ifstream infile2("data32.txt");
 	if (!infile2) {
@@ -56,7 +58,6 @@ int main() {
 		G.displayGraph();
 		G.depthFirstSearch();    // find and display depth-first ordering to cout
 	}
-	
 	cout << endl;
 	return 0;
 }

@@ -3,10 +3,13 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <climits>
+
 using namespace std;
 
 // simple class containing one string to use for testing
 // not necessary to comment further
+const int INF = INT_MAX;
 
 class NodeData {
 	friend ostream & operator<<(ostream &, const NodeData &);
