@@ -2,35 +2,39 @@
 #define HASH_TABLE_H
 
 #include <vector>
-#include "customer.h"
+
+class Customer;
 
 class HashTable {
+public:
+    explicit HashTable(int size = 101);
+
+    // Insert or replace by customer ID (pulled from c->getId()).
+    void put(Customer* c);
+
+    // Lookup by ID; returns nullptr if not found.
+    Customer* get(int id) const;
+
+    // Convenience exists check.
+    bool has(int id) const;
+
+    // Helper to iterate values (for CustomerDirectory::printAll()).
+    std::vector<Customer*> collectValues() const;
+
 private:
     struct Entry {
-        int key;            // customer ID
-        Customer* value;    // pointer to Customer
-        bool occupied;
-        Entry() : key(0), value(nullptr), occupied(false) {}
+        int key = 0;               // customer ID
+        Customer* value = nullptr; // pointer to customer
+        bool occupied = false;     // slot currently holds a value
+        // No 'deleted' tombstone since we don't implement remove()
     };
 
-    std::vector<Entry> buckets;
     int capacity;
     int count;
-public:
-    HashTable(int size = 101);
+    std::vector<Entry> buckets;
 
-    // Insert or update
-    void put(int key, Customer* value);
-
-    // Get a customer pointer by ID (nullptr if not found)
-    Customer* get(int key) const;
-
-    // Check if a customer exists
-    bool has(int key) const;
-    std::vector<Customer*> HashTable::collectValues() const ;
-private:
     int hashFunction(int key) const;
-
+    void rehash(int newCapacity);
 };
 
 #endif
