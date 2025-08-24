@@ -6,13 +6,13 @@
 
 class CustomerDirectory {
 private:
-    HashTable<int, Customer*> table;
-
+    HashTable table;
 public:
     void put(Customer* c);
     Customer* get(int id) const;
     bool has(int id) const;
     void printAll() const;
+    
 };
 
 #endif

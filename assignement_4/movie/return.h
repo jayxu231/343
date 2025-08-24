@@ -5,6 +5,9 @@
 
 class Return : public Transaction {
 public:
+    Return(Movie* moviePtr, const std::string& date = "")
+        : Transaction('R', moviePtr, date) {}
+
     std::string describe() const override;
 };
 

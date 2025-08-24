@@ -2,7 +2,7 @@
 #define CUSTOMER_H
 
 #include <string>
-#include <history.h>
+#include "history.h"
 
 using namespace std; 
 
@@ -17,10 +17,12 @@ private:
     History history;
 
 public:
-    Customer(int id, const string &first, const string &last);
+    Customer(int i, const string &first, const string &last);
 
     int getId() const;
     string getName() const;
+    string getFirst() const;
+    string getLast() const;
     void record(Transaction * t);
     void printHistory() const; 
 

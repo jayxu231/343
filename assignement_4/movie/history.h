@@ -10,6 +10,8 @@ private:
     vector<Transaction *> transactions;
 
 public:
+    History() = default;
+    ~History();    
     void add(Transaction * t);
     vector<Transaction *> latestFirst() const;
     void print() const;
