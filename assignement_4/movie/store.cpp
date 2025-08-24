@@ -46,7 +46,41 @@ void Store::loadMovies(const string& filename) {
 
     cout << "Loaded movies: " << ok << " ok, " << bad << " bad\n";
 }
+void Store::loadCustomers(const std::string& filename) {
+    std::ifstream in(filename);
+    if (!in) {
+        std::cerr << "ERROR: cannot open customers file: " << filename << "\n";
+        return;
+    }
 
+    std::string line;
+    size_t lineNo = 0, ok = 0, bad = 0;
+
+    while (std::getline(in, line)) {
+        ++lineNo;
+
+        // skip blank lines or comment lines
+        if (line.empty() || line[0] == '#') continue;
+
+        std::istringstream ss(line);
+        int id;
+        std::string first, last;
+
+        if (!(ss >> id >> first >> last)) {
+            std::cerr << "ERROR: malformed customer line (" << lineNo << "): "
+                      << line << "\n";
+            ++bad;
+            continue;
+        }
+
+        // create customer and insert into directory
+        Customer* c = new Customer(id, first, last);
+        customers.put(c);
+        ++ok;
+    }
+
+    std::cout << "Loaded customers: " << ok << " ok, " << bad << " bad\n";
+}
 string Store::trim(string s) {
     while (!s.empty() && isspace((unsigned char)s.back())) s.pop_back();
     size_t i = 0; while (i < s.size() && isspace((unsigned char)s[i])) ++i;
@@ -238,12 +272,12 @@ void Store::printInventory() const {
     inventory.printAll();
 }
 
-// void Store::printHistory(int customerId) const {
-//     Customer* cust = customers.get(customerId);
-//     if (!cust) {
-//         cout << "ERROR: unknown customer " << customerId << "\n";
-//         return;
-//     }
-//     cout << "History for " << cust->getName() << " (ID " << cust->getId() << "):\n";
-//     cust->printHistory();
-// }
+void Store::printHistory(int customerId) const {
+    Customer* cust = customers.get(customerId);
+    if (!cust) {
+        cout << "ERROR: unknown customer " << customerId << "\n";
+        return;
+    }
+    cout << "History for " << cust->getName() << " (ID " << cust->getId() << "):\n";
+    cust->printHistory();
+}

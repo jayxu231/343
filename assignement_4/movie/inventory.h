@@ -21,7 +21,7 @@ private:
 
 public:
     Inventory() = default;
-    ~Inventory();  // will delete Movie* if Inventory owns them
+    ~Inventory();
 
     // Add a movie to the correct genre map. If key already exists, merge stock.
     void addMovie(Movie * movie);

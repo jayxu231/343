@@ -11,7 +11,7 @@ static std::string trim(const string& s) {
     return s.substr(b, e - b);
 }
 
-Movie* MovieFactory::createFromLine(const string& line) const {
+Movie* MovieFactory::createFromLine(const string& line) {
     if (line.empty()) return nullptr;
 
     istringstream ss(line);

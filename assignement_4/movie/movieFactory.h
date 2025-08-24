@@ -9,7 +9,7 @@
 
 class MovieFactory {
 public:
-    Movie * createFromLine(const std::string& line) const;
+    static Movie * createFromLine(const std::string& line);
 };
 
 #endif

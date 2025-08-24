@@ -38,5 +38,5 @@ string Drama::display() const {
            title + " | " + to_string(year) + " \n";
 }
 string Drama::describe() const {
-    return title + " — " + director + " (" + to_string(year) + ")";
+    return title + " (" + std::to_string(year) + ") by " + director;
 }

@@ -5,9 +5,10 @@
 #include <istream>
 #include "inventory.h"
 #include "history.h"
-/*
+
 
 #include "customerDirectory.h"
+/*
 #include "borrow.h"
 #include "return.h"
 */
@@ -18,20 +19,20 @@ public:
 
     // Bulk loaders
     void loadMovies(const std::string& filename); //done
-/*    void loadCustomers(const std::string& filename);
-
+    void loadCustomers(const std::string& filename);
+/*
     // Process a commands file containing B/R/H/I lines
     void processCommands(const std::string& filename);
 */
     // Convenience (direct calls, optional)
     void printInventory() const;
-    //void printHistory(int customerId) const;
+    void printHistory(int customerId) const;
 
 
 
 private:
     Inventory inventory;
-    //CustomerDirectory customers;
+    CustomerDirectory customers;
 
     // ---------- small helpers ----------
     static std::string trim(std::string s);

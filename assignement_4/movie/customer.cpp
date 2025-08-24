@@ -13,7 +13,7 @@ int Customer::getId() const {
     return id;
 }
 string Customer::getName() const {
-    return getFirst() + getLast();
+    return getFirst() + " " + getLast();
 }
 string Customer::getFirst() const {
     return firstName;
